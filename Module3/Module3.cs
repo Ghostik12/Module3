@@ -17,6 +17,9 @@ namespace Module3
             Console.WriteLine("My age " + age);
             Console.WriteLine("Do I have a pet? " + pet);
             Console.WriteLine("My shoe size " + footsize);
+
+            Console.WriteLine("IntMin {0} ", int.MinValue);
+            Console.WriteLine("IntMax {0} ", int.MaxValue);
         }
     }
 }
