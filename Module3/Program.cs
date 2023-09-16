@@ -8,8 +8,15 @@ namespace Module3
     {
         static void Main(string[] args)
         {
-            string MyName = "Jane";
-            Console.WriteLine(MyName);
+            string name = "Seva";
+            ushort age = 26;
+            bool pet = true;
+            double footsize = 25.6;
+
+            Console.WriteLine("My name is "+ name);
+            Console.WriteLine("My age " + age);
+            Console.WriteLine("Do I have a pet? " + pet);
+            Console.WriteLine("My shoe size " + footsize);
         }
     }
 }
