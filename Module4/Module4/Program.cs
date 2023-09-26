@@ -67,26 +67,73 @@ namespace Module4 {
             //}
             //Console.Write(s);
 
-            int[,] array = {{ -1, 4, 3, -5, 2 },{ 7, -1, 5, -6, 4} };
-            var x = 0;
-            
-            for (int i = 0;  i <= array.GetUpperBound(0); i++)
+            //int[,] array = {{ -1, 4, 3, -5, 2 },{ 7, -1, 5, -6, 4} };
+            //var x = 0;
+
+            //for (int i = 0;  i <= array.GetUpperBound(0); i++)
+            //{
+            //for (int j = 0; j <= array.GetUpperBound(1); j++)
+            //{
+            //for (int k = j+1; k <= array.GetUpperBound(1); k++)
+            //{
+            //if (array[i, j] > array[i, k])
+            //{
+            //x = array[i, k];
+            //array[i, k] = array[i, j];
+            //array[i, j] = x;
+            //}
+            //}
+            //Console.Write(array[i, j] + " ");
+            //}
+            //Console.WriteLine();
+            //}
+
+            //(string? name, string? type, double age, int namecount) pet;
+
+            //Console.WriteLine("Write name pet: ");
+            //pet.name = Console.ReadLine();
+            //pet.namecount = pet.name.Length;
+            //Console.WriteLine("Write type your pet:");
+            //pet.type = Console.ReadLine();
+            //Console.WriteLine("Write age pet: ");
+            //pet.age = Convert.ToDouble(Console.ReadLine());
+
+            (string? Name, string? LastName, string? Login, int LoginLenght, bool HasPet, int Age, string?[] favcolors) User;
+
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j <= array.GetUpperBound(1); j++)
+
+                Console.WriteLine("Write your name: ");
+                User.Name = Console.ReadLine();
+                Console.WriteLine("Write your lastname");
+                User.LastName = Console.ReadLine();
+                Console.WriteLine("Write login");
+                User.Login = Console.ReadLine();
+                User.LoginLenght = User.Login.Length;
+                Console.WriteLine("Do you have a pet?");
+                var result = Console.ReadLine();
+
+                if (result == "Yes")
                 {
-                    for (int k = j+1; k <= array.GetUpperBound(1); k++)
-                    {
-                        if (array[i, j] > array[i, k])
-                        {
-                            x = array[i, k];
-                            array[i, k] = array[i, j];
-                            array[i, j] = x;
-                        }
-                    }
-                    Console.Write(array[i, j] + " ");
+                    User.HasPet = true;
                 }
-                Console.WriteLine();
+                else
+                {
+                    User.HasPet = false;
+                }
+                Console.WriteLine("How old are you");
+                User.Age = Convert.ToInt32(Console.ReadLine());
+
+                User.favcolors = new string[3];
+                Console.WriteLine("Three yout favorite colors: ");
+                for (int k = 0; k < User.favcolors.Length; k++)
+                {
+                    User.favcolors[k] = Console.ReadLine();
+                }
             }
+
+
+
         }
     }
 }
