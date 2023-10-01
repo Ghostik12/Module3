@@ -13,13 +13,13 @@ namespace Module4
         //    var someName = "Nastya ";
         //    var someAge = 5;
         //    var num = 6;
-            
+
         //    Console.Write(someName);
         //    Console.WriteLine(someAge);
-            
+
         //    GetName(out someName);
         //    GetAge(someAge);
-            
+
         //    Console.WriteLine(someName);
         //    Console.WriteLine(someAge);
         //    int[] sorteddesc = new int[2];
@@ -112,26 +112,65 @@ namespace Module4
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Write: ");
-            var str = Console.ReadLine();
-            Console.WriteLine("Write deep(letter): ");
+            //Console.WriteLine("Write: ");
+            //var str = Console.ReadLine();
+            //Console.WriteLine("Write deep(letter): ");
             var deep = int.Parse(Console.ReadLine());
-
-            Echo(str, deep);
+            var x = byte.Parse(Console.ReadLine());
+            Factorial(deep);
+            Console.WriteLine(PowerUp(deep, x));
+            //Echo(str, deep);
         }
 
-        static void Echo (string phrase, int deep)
-        {
-            var modif = phrase;
-            if (modif.Length > 2 )
-            {
-                modif = modif.Remove(0, 2);
-            }
-            Console.WriteLine("..." + modif); 
+        //static void Echo (string phrase, int deep)
+        //{
+        //    var modif = phrase;
+        //    if (modif.Length > 2 )
+        //    {
+        //        modif = modif.Remove(0, 2);
+        //        Console.BackgroundColor = (ConsoleColor)deep;
+        //        Console.WriteLine("..." + modif);
+        //    }
+        //    //Console.BackgroundColor = (ConsoleColor)deep;
+        //    //Console.WriteLine("..." + modif);
 
-            if (deep > 1) 
+        //    if (deep > 1) 
+        //    {
+        //        Echo(modif, deep - 1);
+        //    }
+
+        //    Console.BackgroundColor = ConsoleColor.Black;
+        //}
+
+        static decimal Factorial(int x)
+        {
+            if (x == 0 || x == 1)
             {
-                Echo(modif, deep - 1);
+                return 1;
+            }
+            else
+            {
+                return x * Factorial(x - 1);
+            }
+        }
+
+        private static int PowerUp(int N, byte pow)
+        {
+            if (pow == 0)
+            {
+                return 1;
+            }
+            else
+            {
+
+                if (pow == 1)
+                {
+                    return N;
+                }
+                else
+                {
+                    return N * PowerUp(N, --pow);
+                }
             }
         }
     }
