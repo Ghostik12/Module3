@@ -11,9 +11,9 @@ namespace Module7
     {
         static void Main(string[] args)
         {
-            Order<Delivery> odrer1 = new() { Delivery = new HomeDelivery("Военно-морская, 16", "Seva", new DateTime()), Number = 1, Description = "Нет описания", BasketOrder = null, Product = null };
-            Order<Delivery> odrer2 = new() { Delivery = new PickPointDelivery("Военно-морская, 16", "Seva", new DateTime()), Number = 2, Description = "Нет описания" };
-            Order<Delivery> odrer3 = new() { Delivery = new ShopDelivery("Военно-морская, 16", "Seva", new DateTime()), Number = 3, Description = "Нет описания" };
+            Order<Delivery> odrer1 = new() { Delivery = new HomeDelivery("Sfasdfdf, 16", "Seva", new DateTime()), Number = 1, Description = "Not", BasketOrder = null, Product = null };
+            Order<Delivery> odrer2 = new() { Delivery = new PickPointDelivery("Gsfgfggf, 16", "Seva", new DateTime()), Number = 2, Description = "Not" };
+            Order<Delivery> odrer3 = new() { Delivery = new ShopDelivery("Gsdgfdgf, 16", "Seva", new DateTime()), Number = 3, Description = "Not" };
         }
     }
 }
