@@ -11,30 +11,35 @@ namespace Module8
     {
         public static void Main(string[] args)
         {
-            string str = "myFriends.dat";
-
-            var person = new Contact("Seva", 325342525, "fgfgfgdfgf");
-            BinaryFormatter bf = new BinaryFormatter();
-
-            using (var fs = new FileStream(str, FileMode.OpenOrCreate))
-            {
-                bf.Serialize(fs, person);
-            }
+            string path = @"C:\\Users\\Ghosman\\Desktop\\Новая папка\\";
+            DeleteFileAndDirectory(path);
         }
 
-        [Serializable]
-        class Contact
+        public static void DeleteFileAndDirectory(string path)
         {
-
-            public string Name { get; set; }
-            public long PhoneNumber { get; set; }
-            public string Email { get; set; }
-
-            public Contact(string name, long phoneNumber, string email)
+            DirectoryInfo dir = new DirectoryInfo(path);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            FileInfo[] fileInfo = dir.GetFiles();
+            try
             {
-                Name = name;
-                PhoneNumber = phoneNumber;
-                Email = email;
+                if (Directory.Exists(path))
+                {
+                    foreach (var file1 in fileInfo)
+                    {
+                        if ((DateTime.Now - file1.LastWriteTime) > TimeSpan.FromMinutes(2))
+                            file1.Delete();
+                    }
+                    foreach (var file in dirs)
+                    {
+                        DeleteFileAndDirectory(file.FullName);
+                        if ((DateTime.Now - file.LastWriteTime) > TimeSpan.FromMinutes(2))
+                            file.Delete(true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
