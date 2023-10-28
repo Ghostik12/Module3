@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,33 +11,30 @@ namespace Module8
     {
         public static void Main(string[] args)
         {
-            string str = "C:\\Users\\Ghosman\\Desktop\\BinaryFile.bin";
-            WriteValues(str);
-            ReadValues(str);
-        }
+            string str = "myFriends.dat";
 
-        static void ReadValues(string str)
-        {
-            string st;
-            if (File.Exists(str)) 
-            { 
-                using (BinaryReader reader = new BinaryReader(File.Open(str, FileMode.Open)))
-                {
-                    st = reader.ReadString();
-                    Console.WriteLine(st);
-                }
+            var person = new Contact("Seva", 325342525, "fgfgfgdfgf");
+            BinaryFormatter bf = new BinaryFormatter();
+
+            using (var fs = new FileStream(str, FileMode.OpenOrCreate))
+            {
+                bf.Serialize(fs, person);
             }
         }
 
-        static void WriteValues(string str)
+        [Serializable]
+        class Contact
         {
-            string st;
-            if (File.Exists(str))
+
+            public string Name { get; set; }
+            public long PhoneNumber { get; set; }
+            public string Email { get; set; }
+
+            public Contact(string name, long phoneNumber, string email)
             {
-                using (BinaryWriter writer = new BinaryWriter(File.Open(str, FileMode.Create)))
-                {
-                    writer.Write($"Файл измене {DateTime.Now} на компьютере {Environment.OSVersion}");
-                }
+                Name = name;
+                PhoneNumber = phoneNumber;
+                Email = email;
             }
         }
     }
