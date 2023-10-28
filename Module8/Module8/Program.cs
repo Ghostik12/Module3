@@ -10,42 +10,33 @@ namespace Module8
     {
         public static void Main(string[] args)
         {
-            string tempFile = Path.GetTempFileName();//используем генерацию имени файла.
-            var fileInfo = new FileInfo(tempFile);//Создаем объект класса FileInfo.
+            string str = "C:\\Users\\Ghosman\\Desktop\\BinaryFile.bin";
+            WriteValues(str);
+            ReadValues(str);
+        }
 
-            using (StreamWriter sw = fileInfo.CreateText())
-            {
-                sw.WriteLine("Seva");
-                sw.WriteLine("Dima");
-                sw.WriteLine("Nastya");
-                sw.WriteLine(DateTime.Now);
-            }
-
-            using (StreamReader sr = fileInfo.OpenText())
-            {
-                string line = "";
-                while((line = sr.ReadLine()) != null)
+        static void ReadValues(string str)
+        {
+            string st;
+            if (File.Exists(str)) 
+            { 
+                using (BinaryReader reader = new BinaryReader(File.Open(str, FileMode.Open)))
                 {
-                    Console.WriteLine(line);
+                    st = reader.ReadString();
+                    Console.WriteLine(st);
                 }
             }
+        }
 
-            try
+        static void WriteValues(string str)
+        {
+            string st;
+            if (File.Exists(str))
             {
-                string tempFile2 = Path.GetTempFileName();
-                var fileInfo2 = new FileInfo(tempFile2);
-
-                fileInfo2.Delete(); //Убедимся, что файл назначения точно отсутствует
-
-                fileInfo.CopyTo(tempFile2);//Копируем информацию
-                Console.WriteLine($"{fileInfo} Copy to file {tempFile2}");
-
-                fileInfo.Delete();//Удаляем ранее созданный файл.
-                Console.WriteLine($"File {fileInfo} delete");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message );
+                using (BinaryWriter writer = new BinaryWriter(File.Open(str, FileMode.Create)))
+                {
+                    writer.Write($"Файл измене {DateTime.Now} на компьютере {Environment.OSVersion}");
+                }
             }
         }
     }
