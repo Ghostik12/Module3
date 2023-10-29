@@ -12,29 +12,28 @@ namespace Module8
         public static void Main(string[] args)
         {
             string path = @"C:\\Users\\Ghosman\\Desktop\\Новая папка\\";
-            DeleteFileAndDirectory(path);
+            GetSize(path);
         }
 
-        public static void DeleteFileAndDirectory(string path)
+        public static void GetSize(string path)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
+            FileInfo[] str = dir.GetFiles();
             DirectoryInfo[] dirs = dir.GetDirectories();
-            FileInfo[] fileInfo = dir.GetFiles();
+            long size = 0;
             try
             {
-                if (Directory.Exists(path))
+                if (dir.Exists)
                 {
-                    foreach (var file1 in fileInfo)
+                    foreach (var file in str)
                     {
-                        if ((DateTime.Now - file1.LastWriteTime) > TimeSpan.FromMinutes(2))
-                            file1.Delete();
+                        size += file.Length;
                     }
                     foreach (var file in dirs)
                     {
-                        DeleteFileAndDirectory(file.FullName);
-                        if ((DateTime.Now - file.LastWriteTime) > TimeSpan.FromMinutes(2))
-                            file.Delete(true);
+                        GetSize(file.FullName);
                     }
+                    Console.WriteLine($"Размер подкаталога в байтах: {size}");
                 }
             }
             catch (Exception ex)
