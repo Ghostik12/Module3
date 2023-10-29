@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -12,15 +13,23 @@ namespace Module8
         public static void Main(string[] args)
         {
             string path = @"C:\\Users\\Ghosman\\Desktop\\Новая папка\\";
-            GetSize(path);
+            long dirSize = 0;
+            dirSize = GetSize(path, ref dirSize);
+            if (dirSize == 0) 
+            {
+                Console.WriteLine($"Каталог {path} пуст");
+            }
+            else
+            {
+                Console.WriteLine($"Размер каталога {path} составляет {dirSize} Байт");
+            }
         }
 
-        public static void GetSize(string path)
+        public static long GetSize(string path, ref long size)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] str = dir.GetFiles();
             DirectoryInfo[] dirs = dir.GetDirectories();
-            long size = 0;
             try
             {
                 if (dir.Exists)
@@ -31,15 +40,15 @@ namespace Module8
                     }
                     foreach (var file in dirs)
                     {
-                        GetSize(file.FullName);
+                        GetSize(file.FullName, ref size);
                     }
-                    Console.WriteLine($"Размер подкаталога в байтах: {size}");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            return size;
         }
     }
 }
