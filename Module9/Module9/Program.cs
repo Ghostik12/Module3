@@ -6,142 +6,100 @@ namespace Module9
     {
         static void Main(string[] args)
         {
-            Exception ex = new Exception("Произошло исключение");
-            ex.Data.Add("Дата создания исключения", DateTime.Now);
-            ex.HelpLink = "https://yandex.ru";
+            NumberReader reader = new NumberReader();
+            reader.NumberEnteredEvent += Sort;
 
             try
             {
-                throw new RankException("Fail");
+                //reader.Read();
+                while (true)
+                {
+                    reader.Read();
+                    Exception[] exception = new Exception[5];
+                    exception[0] = new ArgumentException();
+                    exception[1] = new FormatException();
+                    exception[2] = new RankException();
+                    exception[3] = new TimeoutException();
+                    exception[4] = new MyException();
+                }
             }
-            catch (Exception exception)
-            { 
-                Console.WriteLine(exception.Message);
-                Console.WriteLine(exception.GetType());
-            }
-            finally
+            catch (Exception ex)
             {
-                Console.WriteLine("Сработал finally");
+                Console.WriteLine(ex.ToString());
             }
-            Sum sum = Minus;
-            sum += Plus;
 
-            sum -= Plus;
-            sum(9, 4);
-            //Strin str = Str;
-            //str.Invoke();
-            //SumFiguer SM = Figuer;
-            //int sm = SM(10, 15);
-            //Console.WriteLine(sm);
-            //CheckLenght cL = Check;
-            //bool chec = cL("Check");
-            //Console.WriteLine(chec);
-
-            Action<string> action = Str;
-            action("srt");
-            Func<int, int, int> func = Figuer; 
-            int result = func(10, 15);
-            Console.WriteLine(result);
-            Predicate<string> predicate = Check;
-            bool chec = Check("Mamba");
-            Console.WriteLine(chec);
-
-            ShowMassege sh = (string massege) => Console.WriteLine($"{massege}");
-            sh.Invoke("Hello world");
-
-            RandomNumber rn = () => new Random().Next(0, 100);
-            int random = rn.Invoke();
-            Console.WriteLine(random);
-
-            CarDelegate carDelegate = LexusHead;
-            ChildInfo ch = GetParentInfo;
-            ch.Invoke(new Child());
-        }
-
-        delegate int RandomNumber();
-        delegate void ShowMassege(string massege);
-        public delegate void Sum(int a, int b);
-        //public delegate void Strin();
-        //public delegate int SumFiguer(int a, int b);
-        //public delegate bool CheckLenght(string s);
-
-        public delegate Car CarDelegate();
-        delegate void ChildInfo(Child childInfo);
-
-        static void Minus (int a, int b)
-        {
-            Console.WriteLine(a - b);
-        }
-
-        static void Plus(int a, int b)
-        {
-            Console.WriteLine(a + b);
-        }
-
-        static void Str(string str)
-        {
-            Console.WriteLine(str);
-        }
-
-        private static int Figuer(int a, int b) 
-        {
-            return a + b;
-        }
-
-        static bool Check(string check)
-        {
-            if (check.Length < 3)
+            try
             {
-                return false;
+
             }
-            else
+            catch (FormatException)
             {
-                return true;
+                Console.WriteLine("Некорректное число");
             }
         }
+        
+        static void Sort(int number)
+        {
+            List<string> list = new List<string>();
+            list.Add("Smirnov");
+            list.Add("Ivanov");
+            list.Add("Luzhaev");
+            list.Add("Baranov");
+            list.Add("Luzhaeva");
 
-        public static Car CarHead()
-        {
-            return null;
-        }
-        public static Lexus LexusHead()
-        {
-            return null;
-        }
+            Console.WriteLine("Список до сортировки");
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
 
-        public static Parent ParentHead()
-        {
-            return null;
-        }
-
-        public static Child ChildHead()
-        {
-            return null;
-        }
-
-        public static void GetParentInfo(Parent p)
-        {
-            Console.WriteLine(p.GetType());
+            if (number == 1)
+            {
+                list.Sort();
+                foreach (string str in list)
+                {
+                    Console.WriteLine(str);
+                }
+            }
+            else 
+            {
+                    var ln = list.OrderByDescending(x => x);
+                    foreach (string str in ln)
+                    { 
+                        Console.WriteLine(str); 
+                    }
+            }
         }
     }
 
-    class Car
-    {
+    public class MyException : Exception 
+    { 
+        public MyException() : base () 
+        {
 
+        }
     }
 
-    class Lexus : Car
+    class NumberReader
     {
+        public delegate void NumberEnteredDelegate(int number);
+        public event NumberEnteredDelegate NumberEnteredEvent;
+        public void Read()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Need write 1 or 2");
 
-    }
+            int number = Convert.ToInt32 (Console.ReadLine());
 
-    class Parent
-    {
+            if (number != 1 && number != 2) throw new FormatException();
 
-    }
+            NumberEntered(number);
+        }
 
-    class Child : Parent
-    {
-
+        protected virtual void NumberEntered(int number)
+        {
+            NumberEnteredEvent?.Invoke(number);
+        }
     }
 }
