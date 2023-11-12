@@ -52,6 +52,10 @@ namespace Module9
             RandomNumber rn = () => new Random().Next(0, 100);
             int random = rn.Invoke();
             Console.WriteLine(random);
+
+            CarDelegate carDelegate = LexusHead;
+            ChildInfo ch = GetParentInfo;
+            ch.Invoke(new Child());
         }
 
         delegate int RandomNumber();
@@ -60,6 +64,9 @@ namespace Module9
         //public delegate void Strin();
         //public delegate int SumFiguer(int a, int b);
         //public delegate bool CheckLenght(string s);
+
+        public delegate Car CarDelegate();
+        delegate void ChildInfo(Child childInfo);
 
         static void Minus (int a, int b)
         {
@@ -92,5 +99,49 @@ namespace Module9
                 return true;
             }
         }
+
+        public static Car CarHead()
+        {
+            return null;
+        }
+        public static Lexus LexusHead()
+        {
+            return null;
+        }
+
+        public static Parent ParentHead()
+        {
+            return null;
+        }
+
+        public static Child ChildHead()
+        {
+            return null;
+        }
+
+        public static void GetParentInfo(Parent p)
+        {
+            Console.WriteLine(p.GetType());
+        }
+    }
+
+    class Car
+    {
+
+    }
+
+    class Lexus : Car
+    {
+
+    }
+
+    class Parent
+    {
+
+    }
+
+    class Child : Parent
+    {
+
     }
 }
