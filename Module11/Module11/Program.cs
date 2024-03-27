@@ -54,6 +54,7 @@ namespace Module11
                 AudioFileName = "audio",
                 InputAudioFormat = "ogg",
                 OutputAudioFormat = "wav",
+                InputAudioBitrate = 48000,
             };
         }
     }
