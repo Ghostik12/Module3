@@ -22,9 +22,10 @@ namespace TestDBSSMS
                 await connection.OpenAsync();
                 result = true;
             }
-            catch
+            catch (Exception ex)
             {
                 result = false;
+                Console.WriteLine(ex.Message);
             }
 
             return result;

@@ -1,4 +1,5 @@
-﻿using TestDBSSMS;
+﻿using System.Data;
+using TestDBSSMS;
 
 
 namespace Test
@@ -7,21 +8,26 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            var con = new MainConnector();
+            var manager = new Manager();
 
-            var result = con.ConnectAsync();
+            manager.Connect();
+            manager.ShowData();
 
-            if (result.Result)
-            {
-                Console.WriteLine("Подключено успешно!");
-            }
-            else
-            {
-                Console.WriteLine("Ошибка подключения!");
-            }
+            Console.WriteLine("Введите логин для добавления:");
+            var login = Console.ReadLine();
 
+            Console.WriteLine("Введите имя для добавления:");
+            var name = Console.ReadLine();
+
+            manager.AddUser(login, name);
+
+            Console.Write("Введите логие для удаления: ");
+            var count = manager.DeleteUserByLogin(Console.ReadLine());
+            Console.Write($"Количество удаленных строк: {count}");
+
+            manager.Disconnect();
+            
             Console.ReadKey();
-
         }
     }
 }
