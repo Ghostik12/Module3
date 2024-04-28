@@ -40,7 +40,6 @@ header{
 
 /* Стили футера */
 footer {
-    position: absolute;
     bottom: 0;
     font-size: medium;
     color: dimgrey;
