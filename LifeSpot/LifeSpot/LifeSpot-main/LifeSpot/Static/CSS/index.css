@@ -77,3 +77,17 @@ input {
 input:focus {
     border: 2px solid dimgrey;
 }
+
+.review-container,.review-button {
+    display: inline-block;
+    margin-top: 0.5em;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+.review-text {
+    display: block;
+    margin-top: 0.5em;
+    padding-left: 1%;
+    padding-top: 1%;
+}

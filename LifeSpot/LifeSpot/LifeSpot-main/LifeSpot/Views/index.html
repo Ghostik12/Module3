@@ -5,24 +5,33 @@
     <title>LifeSpot</title>
     <!--Подключение стилей по отностиельному пути из внешнего файла-->
     <link href="../Static/CSS/index.css" rel="stylesheet" type="text/css">
-    
+    <script defertype="text/javascript" src="../Static/JS/index.js"></script>
+    <script>
+        //handleSession();
+        //checkAge();
+        //sessionLog();
+        setTimeout(() =>
+            alert("Нравится LifeSpot? " + '\n' + "Подпишитесь на наш Instagram @lifespot999!"),
+            30000);
+        const inputPasrseFunction = function () {
+            return document.getElementsByTagName('input')[0].value.toLowerCase();
+        }
+    </script>
 </head>
-    
     <!--Хедер страницы находится над тегом body-->
 <header id="header-index">
     <!--Заголовок страницы-->
     <h1>LifeSpot - прямые трансляции с улиц</h1>
     <!--Параграф-->
     <p>Покажем, что происходит прямо сейчас</p>
-
-    <input type="text" oninput="filter()"  size=50%>
+    <input type="text" oninput="filter(inputPasrseFunction())"  size=50%>
 </header>
     
     <!--Сайд-бар страницы (пока все ссылки ведут на главную)-->
     <aside id="sidebar">
         <div class="navbar">
             <a href="/"><p>Все трансляции</p></a>
-            <a href="/"><p>О проекте</p></a>
+            <a href="https://localhost:5001/about"><p>О проекте</p></a>
         </div>
     </aside>
     
