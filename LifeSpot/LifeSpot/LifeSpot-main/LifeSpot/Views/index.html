@@ -7,12 +7,12 @@
     <link href="../Static/CSS/index.css" rel="stylesheet" type="text/css">
     <script defertype="text/javascript" src="../Static/JS/index.js"></script>
     <script>
-        //handleSession();
+        handleSession(sessionLog, checker);
         //checkAge();
         //sessionLog();
-        setTimeout(() =>
-            alert("Нравится LifeSpot? " + '\n' + "Подпишитесь на наш Instagram @lifespot999!"),
-            30000);
+        //setTimeout(() =>
+        //    alert("Нравится LifeSpot? " + '\n' + "Подпишитесь на наш Instagram @lifespot999!"),
+        //    30000);
         const inputPasrseFunction = function () {
             return document.getElementsByTagName('input')[0].value.toLowerCase();
         }
@@ -31,7 +31,8 @@
     <aside id="sidebar">
         <div class="navbar">
             <a href="/"><p>Все трансляции</p></a>
-            <a href="https://localhost:5001/about"><p>О проекте</p></a>
+            <a href="/about"><p>О проекте</p></a>
+            <a href="/testing"><p>Тестирование</p></a>
         </div>
     </aside>
     

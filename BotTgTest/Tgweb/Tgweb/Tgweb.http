@@ -1,0 +1,6 @@
+@Tgweb_HostAddress = http://localhost:5222
+
+GET {{Tgweb_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
